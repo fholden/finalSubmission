@@ -118,5 +118,5 @@ byAct %>% summarise_each(funs(mean,sd))
 
 - 5 The table "meltedDataTBL" is then exported:
 ```{r}
-write.csv(meltedDataTBL,"./tidyGCDProjectDataSet.csv",row.names=FALSE)
+write.table(meltedDataTBL,"./tidyGCDProjectDataSet.txt",row.names=FALSE)
 ```
