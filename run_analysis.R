@@ -1,7 +1,7 @@
 # clear Environment, show working directory
 rm(list=ls())
 curwd <- getwd()
-GCDProjectWD <- "/Users/fholden/coursea/GetCleanData/ProjectWork/"
+GCDProjectWD <- "/Users/fholden/coursea/GetCleanData/ProjectWork/finalSubmission"
 setwd(GCDProjectWD)
 # show UCI HAR Dataset
 dir()
@@ -19,4 +19,5 @@ source("ProjectWork1_loadTest.R")
 source("ProjectWork2_loadTrain.R")
 source("ProjectWork3_Clean.R")
 write.csv(meltedDataTBL,"./tidyGCDProjectDataSet.csv",row.names=FALSE)
+write.table(meltedDataTBL,"./tidyGCDProjectDataset.tbl",row.names=FALSE)
 stop("finished")
