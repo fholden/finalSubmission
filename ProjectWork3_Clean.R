@@ -17,6 +17,10 @@ niceDataTBL <- inner_join(subDataTBL,subActivityLables,by=c("Activities" = "Acti
 dataIDcols <- select(niceDataTBL,Subjects,ActDescription)
 meanCols <- select(niceDataTBL,contains("mean",ignore.case=TRUE))
 stdCols <- select(niceDataTBL,contains("std",ignore.case=TRUE))
+# get rid of the dots.  use gsub with the dots as "\\."
+names(meanCols) <- gsub("\\.","",names(meanCols))
+names(stdCols) <- gsub("\\.","",names(stdCols))
+
 #
 nicerDataTBL <- cbind(dataIDcols,meanCols,stdCols)
 #
