@@ -68,6 +68,8 @@ The datafolder for the train data is identical to the test folder with "test" re
 After reviewing the datasets, it became clear that in the end, we wanted a 4 colum data.frame where each row was an observation, and the four columns would be named: Subjects, ActDescription, variable, value.
 ```{r}
 # I considered the names: variable, and value, to be sufficiently description column names.
+# but I just listened to week 4 lecture 1 and decided to eliminate the periods
+# I used: names(<dataset>) <-  gsub("\\.","",names(<datast>)
 ```
 This was accomplished by performing the following steps:
 
