@@ -83,6 +83,8 @@ This was accomplished by performing the following steps:
 - 7 label the columns with descriptive variable names (objective 4 of the Project assignment)
 ```{r}
 # I thought that after removing the "(" and other bothersome R characters, the names were perfect!
+# but i just listened to the first lecture week 4 and decided to use gsub 
+# to eliminate the periods:"." with "\\."
 ```
 
 - 8 make and export a tidy data set showing the average of each variable (already computed in the dataset) for each Subject and each Activity
