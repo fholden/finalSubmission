@@ -4,7 +4,7 @@ author: "Frank Holden"
 date: "May 15, 2015"
 output: html_document
 ---
-This is work done as part of the "Getting and Cleaning Data" Coursera course May 4->24,, 2015.  The objective is to prepare tidy data (named tidyGCDProjectDataSet.csv) that can be used for later analysis.
+This is work done as part of the "Getting and Cleaning Data" Coursera course May 4->24,, 2015.  The objective is to prepare tidy data (named tidyGCDProjectDataSet.txt) that can be used for later analysis.
 
 This is the code book that describes the variables, the data, and the transformations and work that cleaned up the data
 
