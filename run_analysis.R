@@ -11,13 +11,16 @@ if (debug) {
      source("ProjectWork1_loadTest_10rows.R")
      source("ProjectWork2_loadTrain_10rows.R")
      source("ProjectWork3_Clean.R")
-     stop("finished debug")}
+     print("finished debug")}
 #
 # load the full dataset
 rm(list=ls())
 source("ProjectWork1_loadTest.R")
 source("ProjectWork2_loadTrain.R")
 source("ProjectWork3_Clean.R")
-write.csv(meltedDataTBL,"./tidyGCDProjectDataSet.csv",row.names=FALSE)
-write.table(meltedDataTBL,"./tidyGCDProjectDataset.txt",row.names=FALSE)
-stop("finished")
+summaryTBL <- aggregate(meltedDataTBL$value, 
+                        list(Subject=meltedDataTBL$Subjects,Activity=meltedDataTBL$ActDescription,Variable=meltedDataTBL$variable),
+                        FUN=mean)
+names(summaryTBL) <- c(names(summaryTBL[,1:3]),"MeanValue")
+write.table(summaryTBL,"./tidyGCDProjectDataset.txt",row.names=FALSE)
+print("finished")
