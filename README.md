@@ -116,7 +116,10 @@ byAct %>% summarise_each(funs(mean,sd))
 #done with the work 
 ```
 
-- 5 The table "meltedDataTBL" is then exported:
+- 5 Make the summary data table and export it 
 ```{r}
-write.table(meltedDataTBL,"./tidyGCDProjectDataSet.txt",row.names=FALSE)
+summaryTBL <- aggregate(meltedDataTBL$value, 
+     list(Subject=meltedDataTBL$Subjects,Activity=meltedDataTBL$ActDescription,Variable=meltedDataTBL$variable),FUN=mean)
+names(summaryTBL) <- c(names(summaryTBL[,1:3]),"MeanValue")
+write.table(summaryTBL,"./tidyGCDProjectDataset.txt",row.names=FALSE)
 ```
