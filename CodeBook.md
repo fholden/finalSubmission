@@ -87,9 +87,9 @@ This was accomplished by performing the following steps:
 # I thought that after removing the "(" and other bothersome R characters, the names were perfect!
 ```
 
-- 8 make and export a tidy data set showing the average of each variable (already computed in the dataset) for each Subject and each Activity
+- 8 make and export a tidy data set showing the average of each variable (86) for each Subject(30) and each Activity(6)
 ```{r}
-tGCDDF <- read.csv("tidyGCDProjectDataSet.csv")
+tGCDDF <- read.table("tidyGCDProjectDataSet.txt",header=T)
 dim(tGCDDF)
 names(tGCDDF)
 variableNames <- unique(tGCDDF["variable"])
