@@ -99,8 +99,17 @@ nicerDataTBL <- cbind(dataIDcols,meanCols,stdCols)
 #
 #melt the tbl but set up a vector of the Measure.Vars first
 measureVars <- names(nicerDataTBL)
+# make the variable names easier to read
+newSub <- function(x,y,z) { sub(y,z,x)}  # this sub allows me to use function sub() with the vector as the first variable
+vU1 <- measureVars %>% newSub("Gyro","Rotation") %>% newSub("Mag","Magnitude") %>% newSub("AccJerk","Jerk") %>% 
+     newSub("Acc","Acceleration") %>% newSub("mean","_mean") %>% newSub("std","_stDev") %>%
+     newSub("X","_X-axis") %>% newSub("Y","_Y-axis") %>% newSub("Z","_Z-axis")
+vU2 <- vU1 %>% newSub("^t","") %>% newSub("^f","FourierTransform_")
+# replace the names
+names(nicerDataTBL) <- vU2
+# now melt
 # drop the first two measureVars as they are "Subjects" and "ActDescription"
-measureVars <- measureVars[3:length(measureVars)]
+measureVars <- vU2[3:length(vU2)]
 # now melt check first to see that "reshape2" package is installed
 if (!any(installed.packages()=="reshape2")) {install.packages("reshape2")}
 library(reshape2)
@@ -116,7 +125,10 @@ byAct %>% summarise_each(funs(mean,sd))
 #done with the work 
 ```
 
-- 5 The table "meltedDataTBL" is then exported:
+- 5 Make the summary data table and export it 
 ```{r}
-write.table(meltedDataTBL,"./tidyGCDProjectDataSet.txt",row.names=FALSE)
+summaryTBL <- aggregate(meltedDataTBL$value, 
+     list(Subject=meltedDataTBL$Subjects,Activity=meltedDataTBL$ActDescription,Variable=meltedDataTBL$variable),FUN=mean)
+names(summaryTBL) <- c(names(summaryTBL[,1:3]),"MeanValue")
+write.table(summaryTBL,"./tidyGCDProjectDataset.txt",row.names=FALSE)
 ```

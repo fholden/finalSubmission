@@ -26,12 +26,21 @@ nicerDataTBL <- cbind(dataIDcols,meanCols,stdCols)
 #
 #melt the tbl but set up a vector of the Measure.Vars first
 measureVars <- names(nicerDataTBL)
-measureVars <- measureVars[3:length(measureVars)]
+
+# make nicer names:
+newSub <- function(x,y,z) { sub(y,z,x)}
+vU1 <- measureVars %>% newSub("Gyro","Rotation") %>% newSub("Mag","Magnitude") %>% newSub("AccJerk","Jerk") %>% 
+     newSub("Acc","Acceleration") %>% newSub("mean","_mean") %>% newSub("std","_stDev") %>%
+     newSub("X","_X-axis") %>% newSub("Y","_Y-axis") %>% newSub("Z","_Z-axis")
+vU2 <- vU1 %>% newSub("^t","") %>% newSub("^f","FourierTransform_")
+head(vU2)
+names(nicerDataTBL) <- vU2
 # now melt
+measureVars <- vU2[3:length(vU2)]
 if (!any(installed.packages()=="reshape2")) {install.packages("reshape2")}
 library(reshape2)
 meltedDataTBL <- melt(nicerDataTBL, id=c("Subjects","ActDescription"), measure.vars = measureVars)
-#
+##
 library(plyr)
 ddply(meltedDataTBL,.(ActDescription),summarize,mean(value))
 #
